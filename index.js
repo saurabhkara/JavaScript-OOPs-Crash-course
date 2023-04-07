@@ -167,3 +167,45 @@ const accounts ={
 // console.log(accounts.latest=800)
 // console.log(accounts.movement)
 
+//==========================
+//Static method
+//Static methods available on object constructor , not on its prototype
+
+function Hello(name){
+    this.name=name;
+}
+
+const h1 = new Hello('Saurabh');
+Hello.prototype.printName= function(){
+    console.log(this.name);
+}
+
+Hello.Hey= function(){   //this will available on Hello, not its prototype
+    console.log(`hey ${this.name}`);
+}
+
+h1.printName();
+Hello.Hey('Radhe Shyam');
+
+
+class HelloC{
+
+    constructor(name){
+        this.name=name;
+    }
+
+    printName(){
+        console.log(`name: ${this.name}`)
+    }
+    static hey(){
+        console.log('Hey there !!!');
+    }
+
+
+}
+
+const h2 = new  HelloC('Saurabh from Class');
+h2.printName();
+
+HelloC.hey();
+
