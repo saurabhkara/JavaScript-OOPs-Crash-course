@@ -209,3 +209,83 @@ h2.printName();
 
 HelloC.hey();
 
+//=================================================
+//Object.create()
+//we can also create prototype in object constructor by object.create() method
+const personProto= {
+    calcAge(){
+        console.log(2023- this.birthYear)
+    }
+};
+
+const pp = Object.create(personProto);
+// console.log(pp);
+// pp.name='Saurabh';
+// pp.birthYear=1997
+// console.log(pp);
+// pp.calcAge();
+
+// console.log(pp.__proto__ ===personProto);
+
+
+////////////// Coding challenge 2 ////////////////////////
+
+
+class CarC {
+    constructor(speed, brand){
+        this.speed = speed;
+        this.brand = brand;
+    }
+
+    accelerate(){
+        this.speed = this.speed +10;
+    }
+    get getSpeed(){
+        console.log(`Speed of car is ${this.speed /1.6} in US`)
+    }
+
+    set (speed){
+        this.speed = speed;
+        console.log('Speed has been increased');
+    }
+
+
+}
+
+
+const c2 = new CarC(110,'BMW');
+console.log(c2.getSpeed);
+console.log(c2.set(150))
+
+//====================================================
+//Inheritance between classes -----------------------
+
+function Humans(firstName, birthYear){
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
+
+Humans.prototype.calcAge= function(){
+    console.log(`Age : ${2023-this.birthYear}`)
+}
+
+const human = new Humans('Saurabh', 1998);
+// console.log(human);
+// human.calcAge();
+
+
+const Student = function(firstName, birthYear, course){
+    // this.firstName = firstName;
+    // this.birthYear = birthYear;
+    Person.call(this,firstName,birthYear);
+    this.course=course;
+}
+
+Student.prototype.introduce = function(){
+    console.log(`My name is ${this.firstName} pursing ${this.course}`)
+}
+
+const mike = new Student('Mike',1998,'Computer Science');
+// console.log(mike);
+// console.log(mike.introduce());
+
