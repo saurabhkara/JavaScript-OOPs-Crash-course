@@ -277,15 +277,58 @@ const human = new Humans('Saurabh', 1998);
 const Student = function(firstName, birthYear, course){
     // this.firstName = firstName;
     // this.birthYear = birthYear;
-    Person.call(this,firstName,birthYear);
+    Humans.call(this,firstName,birthYear);
     this.course=course;
 }
+
+Student.prototype = Object.create(Humans.prototype)
 
 Student.prototype.introduce = function(){
     console.log(`My name is ${this.firstName} pursing ${this.course}`)
 }
 
+Student.prototype.constructor = Student
+
 const mike = new Student('Mike',1998,'Computer Science');
-// console.log(mike);
+console.log(mike instanceof Student);
+console.log(mike instanceof Humans);
+console.log(mike);
 // console.log(mike.introduce());
+// console.log(mike.calcAge());
+// console.log(mike.__proto__);
+
+//-------------------------------------------------------------
+//Code challenge 3
+
+function Car3(brand, speed){
+    this.brand= brand;
+    this.speed = speed;
+}
+
+Car3.prototype.accelerate= function (){
+    this.speed = this.speed + 20;
+    this.chargeTo = this.chargeTo - 1;
+    console.log(`Speed of car increased to ${this.speed} and charged decreased ${this.chargeTo}`)
+}
+
+Car3.prototype.break = function (){
+    this.speed = this.speed - 10;
+    console.log(`Speed of car decreased to ${this.speed}`);
+}
+
+function EV(brand, speed,chargeTo){
+    this.chargeTo = chargeTo;
+    Car3.call(this,brand,speed);
+}
+
+EV.prototype = Object.create(Car3.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo){
+    this.chargeTo = chargeTo;
+    console.log('Car of battery charged to' , this.chargeTo)
+}
+
+// const tesla = new EV('Tesla',120,50);
+// console.log(tesla);
+// tesla.chargeBattery(80)
 
